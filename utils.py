@@ -35,12 +35,12 @@ def cat_to_id(classes=None):
     :return: {分类标签：id}
     """
     if not classes:
-        classes = ['pos', 'neg']
+        classes = ['0', '1']
     cat2id = {cat: idx for (idx, cat) in enumerate(classes)}
     return classes, cat2id
 
 
-def load_corpus(path, word2id, max_sen_len=50):
+def load_corpus(path, word2id, max_sen_len=70):
     """
     :param path: 样本语料库的文件
     :return: 文本内容contents，以及分类标签labels(onehot形式)
@@ -76,7 +76,8 @@ def build_word2id(file):
     :return: None
     """
     word2id = {'_PAD_': 0}
-    path = [os.path.join('./data/', w) for w in os.listdir('./data/')]
+    path = ['./data/train.txt', './data/validation.txt']
+    print(path)
 
     for _path in path:
         with open(_path, encoding='utf-8') as f:
@@ -92,7 +93,7 @@ def build_word2id(file):
             f.write(str(word2id[w]))
             f.write('\n')
 
-# build_word2id('./data/word_to_id.txt')
+build_word2id('./data/word_to_id.txt')
 
 
 def load_word2id(path):
@@ -135,8 +136,8 @@ def build_word2vec(fname, word2id, save_to_path=None):
                 f.write('\n')
     return word_vecs
 
-# word2id = load_word2id('./data/word_to_id.txt')
-# w2v = build_word2vec('./data/wiki_word2vec_50.bin', word2id, save_to_path='./data/corpus_word2vec.txt')
+word2id = load_word2id('./data/word_to_id.txt')
+w2v = build_word2vec('./data/wiki_word2vec_50.bin', word2id, save_to_path='./data/corpus_word2vec.txt')
 
 
 def load_corpus_word2vec(path):
