@@ -58,8 +58,8 @@ def load_corpus(path, word2id, max_sen_len=70):
             labels.append(label)
             contents.append(content)
     counter = Counter(labels)
-    print('总样本数为：%d' % (len(labels)))
-    print('各个类别样本数如下：')
+    print('total samples:%d' % (len(labels)))
+    print('numbers of kinds:')
     for w in counter:
         print(w, counter[w])
 

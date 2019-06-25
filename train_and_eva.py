@@ -5,19 +5,20 @@ from sklearn import metrics
 from utils import load_word2id, load_corpus_word2vec, load_corpus, cat_to_id
 from TextCNN import TextCNN
 from CONFIG import CONFIG
+      
 
 
 def train():
     config = CONFIG()
-    print('加载word2id===========================')
+    print('word2id_data===========================')
     word2id = load_word2id(config.word2id_path)
-    print('加载word2vec==========================')
+    print('word2vec_data==========================')
     word2vec = load_corpus_word2vec(config.corpus_word2vec_path)
-    print('加载train语料库========================')
+    print('train_data========================')
     x_tr, y_tr = load_corpus(config.train_path, word2id, max_sen_len=config.max_sen_len)
-    print('加载dev语料库==========================')
+    print('dev_data==========================')
     x_val, y_val = load_corpus(config.dev_path, word2id, max_sen_len=config.max_sen_len)
-    print('训练模型===============================')
+    print('train_model===============================')
     tc = TextCNN(CONFIG, embeddings=word2vec)
     with tf.Session() as sess:
         init_op = tf.global_variables_initializer()
@@ -27,10 +28,10 @@ def train():
 
 def test():
     config = CONFIG()
-    print('加载word2id===========================')
+    print('word2id_data===========================')
     word2id = load_word2id(config.word2id_path)
     config.vocab_size = len(word2id)
-    print('加载test语料库=========================')
+    print('test_data=========================')
     x, y = load_corpus(config.test_path, word2id, max_sen_len=config.max_sen_len)
     # x, y = x[:10], y[:10]
     model = TextCNN(config)
@@ -56,5 +57,5 @@ def test():
 
 
 if __name__ == '__main__':
-    train()
+  #  train()
     test()

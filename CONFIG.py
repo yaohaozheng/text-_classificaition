@@ -1,6 +1,7 @@
 class CONFIG():
     update_w2v = True           # 是否在训练中更新w2v
-    vocab_size = 59290          # 词汇量，与word2id中的词汇量一致
+    #vocab_size = 59290          # 词汇量，与word2id中的词汇量一致,训练时候大小，59290
+    vocab_size=58954             #预测时候大小根据实际报错来定
     n_class = 2                 # 分类数：分别为pos和neg
     max_sen_len = 75            # 句子最大长度
     embedding_dim = 50          # 词向量维度
